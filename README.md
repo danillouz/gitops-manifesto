@@ -1,6 +1,6 @@
 # The GitOps Manifesto [wip]
 
-> "GitOps is short for _Git Ops_. It is a name for a set of Ops practices using Git. The spirit of the name is to be like DevOps; something that anyone can do rather than being _a product_." - [Alexis Richardson](https://twitter.com/monadic)
+**Empower developers to do operations.**
 
 While researching CI/CD workflows and DevOps practices for cloud native applications using _Microservices_, _Docker_ and _Kubernetes_,
 I stumbled upon [GitOps](https://www.weave.works/blog/gitops-high-velocity-cicd-for-kubernetes).
@@ -9,43 +9,57 @@ I'm using this repo to create an overview of all things I'm learning about this 
 
 ## What is GitOps
 
-GitOps builds on DevOps where Git is the single source of truth for for the desired state of
-everything in your system; cluster, configuration, applications, tooling, etc.
+> "GitOps is short for _Git Ops_. It is a name for a set of Ops practices using Git. The spirit of the name is to be like DevOps — something that anyone can do rather than being _a product_." - [Alexis Richardson](https://twitter.com/monadic)
+
+GitOps is a name coined by [Weaveworks](https://www.weave.works/) which describes how developers use
+tooling to drive operations. It builds on DevOps best practices, allowing developers to operate Kubernetes
+via Git instead of tools like `kubectl`.
+
+> "kubectl is the new ssh." - Kelsey Hightower
+
+This is possible because Git is used as the single source of truth for the desired state of your
+entire system.
 
 ## Why
 
-We want to be able to reliably deliver quality software at a high velocity in order to innovate,
-stand out in the market and be cost efficient.
+When the desired state of a system is version controlled and used as the single source of truth, we
+get all the benefits of Git and Pull Request based workflows:
+
+* history
+* possibility to revert changes
+* reviews
+* comments
+* possibility to link to issues, Pull Requests, stories, etc
+
+This makes the entire system more _transparent_, _discoverable_, _easier to operate_, _recoverable_
+and _observable_. These attributes help us to reliably deliver quality software at a high velocity
+in order to innovate, stand out in the market and be cost efficient.
 
 > "When we say _high velocity_ we mean that every product team can safely ship updates many times a day — deploy instantly, observe the results in real time, and use this feedback to roll forward or back. The goal is for product teams to use [continuous experimentation](https://blog.acolyer.org/2017/09/29/the-evolution-of-continuous-experimentation-in-software-product-development/) to improve the customer experience as fast as possible." - [Alexis Richardson](https://twitter.com/monadic)
 
 ## How
 
-First of all we must embrace the _DevOps mindset_. This doesn't mean having one or two people
-calling themselves "DevOps Engineers", it means creating a culture where all stakeholders are
-continuously collaborating around a set of shared goals in order to deliver software reliably and
-fast. Adopting microservices can help with that, but only if the teams building them can take
-_full ownership_ of the entire process. For one thing, this means we need to use tooling we're
-comfortable with and can use efficiently. For example, as a developer I want to drive changes through
-Git and have tools that allow me to observe the pushed results.
+By making _Git_ the source of truth of the _desired state_ of the system and making _Obersvability_
+the source of truth of the _actual running state_ of the system, we can use the _Operator Pattern_
+to control the actual state so that it will reflect the desired state. This is achieved by listening
+for certain Git tags to be _pushed_ and in turn orchestrate service deployments to the cluster.
+Tools like [Weaveworks Flux](https://github.com/weaveworks/flux) do this.
 
 > “Ideally if I make a code change, all I want is a URL to tell me where it’s running. You get bonus points if you can give me metrics to tell me how well it’s running." - [Kelsey Hightower](https://twitter.com/kelseyhightower)
 
-GitOps fits perfectly in this type of workflow, where _Git_ becomes the source of truth of the
-_desired state_ of the system and _Obersvability_ becomes the source of truth of the _actual running state_
-of the system. Using the _Operator Pattern_ the actual state can be controlled to reflect the desired
-state, by listening to (certain) Git tags to be pushed and orchestrate service deployments to the
-cluster in a continuous loop. Tools like [Weaveworks Flux](https://github.com/weaveworks/flux)
-achieve this.
-
-Effectively GitOps allows for **operations by Pull Request**.
-
 ## Requirements
 
-1.  [Declarative infrastructure as code](https://www.thoughtworks.com/insights/blog/infrastructure-code-reason-smile)
-2.  Code & config version controlled in Git
-3.  Completely automated delivery pipeline
-4.  Observable & monitorable services
+* [Declarative infrastructure as code](https://www.thoughtworks.com/insights/blog/infrastructure-code-reason-smile)
+* Git:
+
+  * Code & config version controlled
+  * Rollback functionality
+  * Operational changes must be made by Pull Request
+
+* Observable & monitorable services
+* Diff tools detect/alert divergence
+* Sync tools enable convergence
+* Completely automated delivery pipeline
 
 ## Resources
 

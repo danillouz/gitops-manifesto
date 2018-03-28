@@ -41,9 +41,9 @@ in order to innovate, stand out in the market and be cost efficient.
 
 > "When we say _high velocity_ we mean that every product team can safely ship updates many times a day — deploy instantly, observe the results in real time, and use this feedback to roll forward or back. The goal is for product teams to use [continuous experimentation](https://blog.acolyer.org/2017/09/29/the-evolution-of-continuous-experimentation-in-software-product-development/) to improve the customer experience as fast as possible." - [Alexis Richardson](https://twitter.com/monadic)
 
-security
+TODO: security
 
-testing in prod
+TODO: testing in prod
 
 ## How
 
@@ -55,7 +55,9 @@ Tools like [Weaveworks Flux](https://github.com/weaveworks/flux) do this.
 
 > “Ideally if I make a code change, all I want is a URL to tell me where it’s running. You get bonus points if you can give me metrics to tell me how well it’s running." - [Kelsey Hightower](https://twitter.com/kelseyhightower)
 
-Push vs pull deployment
+TODO: Push vs pull deployment
+
+TODO: monitoring & observability
 
 ## Requirements
 
@@ -63,13 +65,12 @@ Push vs pull deployment
 * Immutable deployment artefacts
 
 * Git:
-
   * Code & config version controlled
   * Rollback functionality
   * Operational changes must be made by Pull Request; don't let CI push updates into the Kubernetes cluster or use `kubectl` by hand
   * Build each container image just once and 'promote' it through each test sequence / environment, do not rebuild each time. But you must still update your declarative config changes in Git.
 
-- Observable & monitorable services
+- Monitorable & observable services & infrastructure
 - Diff tools detect/alert divergence
 - Sync tools enable convergence
 - Completely automated delivery pipeline
@@ -96,6 +97,23 @@ Push vs pull deployment
 
 ### Tooling
 
+* [Google Skaffold](https://github.com/GoogleCloudPlatform/skaffold)
+* [Datawire Forge](https://forge.sh/)
+* [Datawire Telepresense](https://www.telepresence.io/)
+* [Ksync](https://vapor-ware.github.io/ksync/)
 * [Weaveworks Flux](https://github.com/weaveworks/flux)
 * [Weaveworks Kubediff](https://github.com/weaveworks/kubediff)
+* [Brigade](https://brigade.sh/)
+* [Draft](https://github.com/Azure/draft)
+* [Helm](https://helm.sh/)
 * [Bitnami Sealed Secrets](https://github.com/bitnami-labs/sealed-secrets)
+* [Dotmesh](https://dotmesh.com/)
+* [Jenkins X](http://jenkins-x.io/)
+* [Keel](https://keel.sh/)
+* [Gitkube](https://gitkube.sh/)
+* [Heighliner](https://heighliner.com/)
+
+### Reference Implementations
+
+* [Google Container Builder](https://github.com/crowdynews/gitops-hello-world-gcb)
+* [Brigade](https://github.com/crowdynews/gitops-hello-world-brigade)
